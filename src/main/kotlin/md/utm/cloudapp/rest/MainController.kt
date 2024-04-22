@@ -10,4 +10,9 @@ class MainController {
     fun main(): String {
         return "Hello World!"
     }
+
+    @GetMapping("/super/secret")
+    fun superSecret(): String {
+        return "How did you find our secret?"
+    }
 }

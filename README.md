@@ -21,6 +21,11 @@ Open [http://localhost:8080](http://localhost:8080) in your browser.
 java -jar ./build/libs/tech-challenge-0.0.1-SNAPSHOT.jar
 ```
 
+### Run in Docker
+```bash
+sh run_in_docker.sh spring_hello
+```
+
 ### Requirements
 
 1. This project should be made to run as a Docker image.
