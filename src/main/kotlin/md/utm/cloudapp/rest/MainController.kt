@@ -15,4 +15,9 @@ class MainController {
     fun superSecret(): String {
         return "How did you find our secret?"
     }
+
+    @GetMapping("/health")
+    fun healthCheck(): String {
+        return "OK"
+    }
 }

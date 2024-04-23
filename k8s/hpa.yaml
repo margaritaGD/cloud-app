@@ -1,0 +1,18 @@
+# https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: utm-spring-boot-mc-mm-hpa
+spec:
+  minReplicas: 1
+  maxReplicas: 3
+  scaleTargetRef:
+    kind: Deployment
+    name: utm-spring-boot-mc-mm
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
