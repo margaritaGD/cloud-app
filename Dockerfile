@@ -6,4 +6,3 @@ RUN ./gradlew build --no-daemon
 RUN ./gradlew bootJar
 ENTRYPOINT ["java","-jar", "./build/libs/cloud-app-mihai-margarita-0.0.1-SNAPSHOT.jar"]
 EXPOSE 8080
-

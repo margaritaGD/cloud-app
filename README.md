@@ -26,6 +26,19 @@ java -jar ./build/libs/tech-challenge-0.0.1-SNAPSHOT.jar
 sh run_in_docker.sh spring_hello
 ```
 
+### How to update docker image in Docker Hub
+If you made some changes to the code and want to update image in Docker Hub 
+you need to recreate the image on local and push it to Docker Hub
+
+```bash
+docker image tag spring_hello mcoslet/utm_master_ac_lab
+docker push mcoslet/utm_master_ac_lab                  
+```
+After this the image will be updated in Docker hub
+
+### Docker image in Docker Hub
+https://hub.docker.com/r/mcoslet/utm_master_ac_lab
+
 ### Requirements
 
 1. This project should be made to run as a Docker image.

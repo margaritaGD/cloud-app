@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: utm-spring-boot-mc-mm
+  labels:
+    app: utm-spring-boot-mc-mm
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: utm-spring-boot-mc-mm
+  template:
+    metadata:
+      labels:
+        app: utm-spring-boot-mc-mm
+    spec:
+      containers:
+        - name: spring-hello
+          image: mcoslet/utm_master_ac_lab
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 5
+
