@@ -29,6 +29,9 @@ jobs:
       - name: Assemble JAR
         run: ./gradlew bootJar
 
+      - name: List output of JAR
+        run: ls -l build/libs/
+
       - name: Set Version
         id: set_version
         run: echo "::set-output name=version::$(echo $GITHUB_RUN_NUMBER)"
