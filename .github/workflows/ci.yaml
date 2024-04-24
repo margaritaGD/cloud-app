@@ -29,8 +29,11 @@ jobs:
       - name: Assemble JAR
         run: ./gradlew bootJar
 
-      - name: List output of JAR
-        run: ls -l build/libs/
+      - name: Upload JAR file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-jar
+          path: build/libs/*.jar
 
       - name: Set Version
         id: set_version
@@ -40,11 +43,14 @@ jobs:
     needs: [ build_jar ]
     runs-on: ubuntu-latest
     steps:
-      - name: List output of JAR
-        run: ls -l build/libs/
-
       - name: Check out code
         uses: actions/checkout@v3
+
+      - name: Download JAR file as artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: built-jar
+          path: build/libs/*.jar
 
       - name: Build Docker Image
         run: |
