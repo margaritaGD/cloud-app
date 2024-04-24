@@ -32,5 +32,11 @@ jobs:
         run: |
           aws eks --region us-east-1 update-kubeconfig --name mcoslet_ac_lab_master
 
-      - name: Update deployment.yaml
-        run: kubectl get pods
+      - name: LS dir
+        run: ls
+
+      - name: Update K8S configurations
+        run: kubectl apply -k k8s
+
+      - name: Perform rolling restart
+        run: kubectl rollout restart deployment/utm-spring-boot-mc-mm
