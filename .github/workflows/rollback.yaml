@@ -6,7 +6,7 @@ on:
     inputs:
       version:
         description: "The version you want to roll back to, example: "
-        required: true
+        required: false
         default: ""
 jobs:
   rollback:
