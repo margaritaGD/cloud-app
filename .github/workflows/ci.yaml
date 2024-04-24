@@ -50,7 +50,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: built-jar
-          path: build/libs/*.jar
+          path: build/libs
 
       - name: Build Docker Image
         run: |
