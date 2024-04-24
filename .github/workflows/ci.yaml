@@ -52,5 +52,5 @@ jobs:
 
       - name: Push Docker Image to Docker Hub
         run: |
-          docker push mcoslet/utm_master_ac_lab:latest
           docker push mcoslet/utm_master_ac_lab:${{needs.build_jar.outputs.version}}
+          docker push mcoslet/utm_master_ac_lab:latest
