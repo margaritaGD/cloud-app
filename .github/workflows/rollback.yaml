@@ -27,8 +27,8 @@ jobs:
           aws eks --region us-east-1 update-kubeconfig --name mcoslet_ac_lab_master
       - name: Rollback
         run: |
-          if ["${{github.event.inputs.version}}" == ""]; then
+          if [ "${{ github.event.inputs.version }}" == "" ]; then
             kubectl rollout undo deployment/utm-spring-boot-mc-mm
           else
-            kubectl rollout undo deployment/utm-spring-boot-mc-mm --to-revision=${{github.event.inputs.version}}
+            kubectl rollout undo deployment/utm-spring-boot-mc-mm --to-revision=${{ github.event.inputs.version }}
           fi
