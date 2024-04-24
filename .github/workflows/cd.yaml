@@ -1,14 +1,8 @@
 name: Deploy to Amazon EKS
 
-# PROD
-#on:
-#  push:
-#    branches: [ "main" ]
-
-# TEST
 on:
-  pull_request:
-    types: [ opened, reopened ]
+  push:
+    branches: [ "main" ]
 
 jobs:
   update-eks-cluster:
