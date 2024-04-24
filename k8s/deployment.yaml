@@ -5,7 +5,6 @@ metadata:
   labels:
     app: utm-spring-boot-mc-mm
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: utm-spring-boot-mc-mm
