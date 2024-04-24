@@ -21,9 +21,22 @@ Open [http://localhost:8080](http://localhost:8080) in your browser.
 java -jar ./build/libs/tech-challenge-0.0.1-SNAPSHOT.jar
 ```
 
-### Run in Docker
+### Test on local docker image
+After the CI was executed successful the docker image was updated on docker hub, to test local you have to:
+#### Pull the latest image
 ```bash
-sh run_in_docker.sh spring_hello
+docker pull mcoslet/utm_master_ac_lab
+```
+
+#### Pull the specific version of image
+In case you want to run on local a specific image you must provide the version of image
+```bash
+docker pull mcoslet/utm_master_ac_lab:<version>
+```
+
+#### Create container from image
+```bash
+docker run --name test_utm_master_ac_lab -p 8080:8080 mcoslet/utm_master_ac_lab
 ```
 
 ### How to update docker image in Docker Hub

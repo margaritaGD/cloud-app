@@ -29,6 +29,12 @@ jobs:
       - name: Assemble JAR
         run: ./gradlew bootJar
 
+      - name: Upload JAR file as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-jar
+          path: build/libs/*.jar
+
       - name: Set Version
         id: set_version
         run: echo "::set-output name=version::$(echo $GITHUB_RUN_NUMBER)"
@@ -39,6 +45,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v3
+
+      - name: Download JAR file as artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: built-jar
+          path: build/libs
 
       - name: Build Docker Image
         run: |
@@ -52,5 +64,5 @@ jobs:
 
       - name: Push Docker Image to Docker Hub
         run: |
-          docker push mcoslet/utm_master_ac_lab:latest
           docker push mcoslet/utm_master_ac_lab:${{needs.build_jar.outputs.version}}
+          docker push mcoslet/utm_master_ac_lab:latest
