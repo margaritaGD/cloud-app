@@ -40,6 +40,9 @@ jobs:
     needs: [ build_jar ]
     runs-on: ubuntu-latest
     steps:
+      - name: List output of JAR
+        run: ls -l build/libs/
+
       - name: Check out code
         uses: actions/checkout@v3
 
