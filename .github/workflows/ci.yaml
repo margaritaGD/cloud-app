@@ -2,21 +2,20 @@ name: Continuous Integration
 
 on:
   pull_request:
-    types: [opened, reopened]
+    types: [ opened, reopened ]
 
 jobs:
   build_jar:
     runs-on: ubuntu-latest
-
-    container:
-      image: gradle:8.7.0-jdk17
+    outputs:
+      version: ${{ steps.set_version.outputs.version }}
 
     steps:
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'adopt'
@@ -29,3 +28,29 @@ jobs:
 
       - name: Assemble JAR
         run: ./gradlew bootJar
+
+      - name: Set Version
+        id: set_version
+        run: echo "::set-output name=version::$(echo $GITHUB_RUN_NUMBER)"
+
+  build_docker_file:
+    needs: [ build_jar ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Build Docker Image
+        run: |
+          docker build -t mcoslet/utm_master_ac_lab:latest -t mcoslet/utm_master_ac_lab:${{needs.build_jar.outputs.version}} .
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Push Docker Image to Docker Hub
+        run: |
+          docker push mcoslet/utm_master_ac_lab:latest
+          docker push mcoslet/utm_master_ac_lab:${{needs.build_jar.outputs.version}}
