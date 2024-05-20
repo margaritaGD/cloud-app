@@ -8,7 +8,7 @@ class MainController {
 
     @GetMapping("/")
     fun main(): String {
-        return "Hello World!"
+        return "Hello World FROM DEMO!"
     }
 
     @GetMapping("/super/secret")
